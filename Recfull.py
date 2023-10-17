@@ -12,6 +12,7 @@ from sklearn.decomposition import FastICA
 ip = "10.34.3.220"
 port = 5000
 
+#Test
 # Inisialisasi variabel-variabel untuk merekam data EEG
 eeg_data = []
 record_duration = 60 # Durasi perekaman dalam detik
