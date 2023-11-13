@@ -35,7 +35,7 @@ def extract_frequency_bands(freq, amplitude):
     theta_band = (4.0, 8.0)
     alpha_band = (8.0, 13.0)
     beta_band = (13.0, 30.0)
-    gamma_band = (30.0, 40.0)  # Sesuaikan dengan kebutuhan Anda
+    gamma_band = (30.0, 40.0)
 
     # Ekstraksi amplitudo dalam rentang frekuensi
     delta_power = simps(amplitude[(freq >= delta_band[0]) & (freq <= delta_band[1])], dx=1/sampling_rate)
@@ -92,7 +92,7 @@ def calculate_power_bands(data, sampling_rate, nperseg, noverlap, nfft):
     eeg_columns = ['TP9', 'AF7', 'AF8', 'TP10']
 
     delta_power = np.zeros(len(eeg_columns))
-    theta_power = np.zeros(len(eeg_columns))
+    theta_power  # Sesuaikan dengan kebutuhan Anda = np.zeros(len(eeg_columns))
     alpha_power = np.zeros(len(eeg_columns))
     beta_power = np.zeros(len(eeg_columns))
     gamma_power = np.zeros(len(eeg_columns))

@@ -9,9 +9,8 @@ import matplotlib.pyplot as plt
 from collections import deque
 
 ip = "192.168.196.175"
-port = 8080
+port = 8080 
 
-#Test
 # Inisialisasi variabel-variabel untuk merekam data EEG
 eeg_data = []
 record_duration = 3060 # Durasi perekaman dalam detik
