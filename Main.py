@@ -12,7 +12,7 @@ ip = "192.168.43.214"
 port = 5000
 
 eeg_data = []
-record_duration = 10
+record_duration = 30
 record_started = False
 server = None 
 
@@ -37,7 +37,7 @@ def stop_recording():
     global eeg_data, record_started, server
 
     if record_started:
-        print("Data EEG telah disimpan dalam TESTING.csv")
+        # print("Data EEG telah disimpan dalam TESTING.csv")
         record_started = False
         if server is not None:
             server.shutdown()
@@ -272,22 +272,22 @@ gamma_power_sd = np.std(gamma_power)
 
 data = {
     'Delta_Value': [all_mean_delta_power], 'Theta_Value': [all_mean_theta_power], 'Alpha_Value': [all_mean_alpha_power], 'Beta_Value': [all_mean_beta_power], 'Gamma_Value': [all_mean_gamma_power],
-    'Delta_Power': [delta_power_db], 'Theta_Power': [theta_power_db], 'Alpha_Power': [alpha_power_db], 'Beta_Power': [beta_power_db], 'Gamma_Power': [gamma_power_db],
-    'SD_Delta_Value': [sd_delta_values], 'SD_Theta_Value': [sd_theta_values], 'SD_Alpha_Value': [sd_alpha_values], 'SD_Beta_Value': [sd_beta_values], 'SD_Gamma_Value': [sd_gamma_values],
-    'SD_Delta_Power': [delta_power_sd], 'SD_Theta_Power': [theta_power_sd], 'SD_Alpha_Power': [alpha_power_sd], 'SD_Beta_Power': [beta_power_sd], 'SD_Gamma_Power': [gamma_power_sd]
+    # 'Delta_Power': [delta_power_db], 'Theta_Power': [theta_power_db], 'Alpha_Power': [alpha_power_db], 'Beta_Power': [beta_power_db], 'Gamma_Power': [gamma_power_db],
+    'SD_Delta_Value': [sd_delta_values], 'SD_Theta_Value': [sd_theta_values], 'SD_Alpha_Value': [sd_alpha_values], 'SD_Beta_Value': [sd_beta_values], 'SD_Gamma_Value': [sd_gamma_values]
+    # 'SD_Delta_Power': [delta_power_sd], 'SD_Theta_Power': [theta_power_sd], 'SD_Alpha_Power': [alpha_power_sd], 'SD_Beta_Power': [beta_power_sd], 'SD_Gamma_Power': [gamma_power_sd]
 }
 
 df = pd.DataFrame(data)
 df.to_csv('TestingFix.csv', index=False, float_format='%.6f')
 
 #Klasifikasi Testing =====================================================================================================
-# import pandas as pd
-# import joblib
+import pandas as pd
+import joblib
 
-# data_to_classify = pd.read_csv("TestingFix.csv")
+data_to_classify = pd.read_csv("TestingFix.csv")
 
-# knn = joblib.load('knn_model.joblib')
-# predictions = knn.predict(data_to_classify)
-# print("Hasil prediksi:")
-# for prediction in predictions:
-#     print(prediction)
+knn = joblib.load('knn_model.joblib')
+predictions = knn.predict(data_to_classify)
+print("Hasil prediksi:")
+for prediction in predictions:
+    print(prediction)

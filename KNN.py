@@ -5,11 +5,11 @@ from sklearn.metrics import classification_report
 import joblib
 
 # Baca data CSV yang sudah dilabeli
-data = pd.read_csv("D:\KULIAH\SEMESTER 7 SKRIPSI\SIIIII.csv")
+data = pd.read_csv("/home/pifitrah/SkripsiVyto/SkripsiStress/SIIIII.csv")
 
-# Pisahkan fitur (X) dan"""  """ label (y)
+# Pisahkan fitur (X) dan label (y)
 X = data.drop('Label', axis=1)  # Ubah 'label' menjadi nama kolom label sesuai dengan data Anda
-y = data['Label']"""  """
+y = data['Label']
 
 # Bagi data menjadi data latih dan data uji
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
