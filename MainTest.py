@@ -6,8 +6,6 @@ import threading
 import numpy as np
 import pandas as pd
 from collections import deque
-import matplotlib.pyplot as plt
-import seaborn as sns
 from scipy.fft import fft
 from scipy.fft import fft, fftfreq
 from scipy.integrate import simps
