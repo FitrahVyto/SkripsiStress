@@ -61,14 +61,14 @@ while True:
     port = 5000
 
     eeg_data = []
-    record_duration = 20
+    record_duration = 60
     record_started = False
     server = None 
 
     mylcd.lcd_clear()
 
     mylcd = I2C_LCD_driver.lcd()
-    countdown_seconds = 20
+    countdown_seconds = 60
     remaining_time = countdown_seconds
 
     # Membuat thread untuk countdown
@@ -337,7 +337,7 @@ while True:
     time.sleep(1)
     data_to_classify = pd.read_csv("TestingFix.csv")
 
-    knn = joblib.load('model.joblib')
+    knn = joblib.load('/home/pifitrah/SkripsiVyto/SkripsiStress/model.joblib')
     predictions = knn.predict(data_to_classify)
     print("Hasil prediksi:")
     print(predictions)
