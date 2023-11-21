@@ -49,7 +49,9 @@ while True:
     def countdown_thread():
         global remaining_time
         while remaining_time > 0:
-            mylcd.lcd_display_string(f"Countdown: {remaining_time} s", 1)
+            mylcd.lcd_clear()
+            mylcd.lcd_display_string(f"Waiting in :", 1, 2)
+            mylcd.lcd_display_string(f"{remaining_time} s", 2, 6)
             time.sleep(1)
             remaining_time -= 1
 
@@ -59,14 +61,14 @@ while True:
     port = 5000
 
     eeg_data = []
-    record_duration = 30
+    record_duration = 20
     record_started = False
     server = None 
 
     mylcd.lcd_clear()
 
     mylcd = I2C_LCD_driver.lcd()
-    countdown_seconds = 30
+    countdown_seconds = 20
     remaining_time = countdown_seconds
 
     # Membuat thread untuk countdown
@@ -109,6 +111,7 @@ while True:
         server = osc_server.ThreadingOSCUDPServer((ip, port), dispatcher_instance)
         print("Listening on UDP port " + str(port))
         server.serve_forever()
+    
     
     countdown_thread.join()
     #PreProcessing =====================================================================================================
@@ -315,12 +318,17 @@ while True:
     beta_power_sd = np.std(beta_power)
     gamma_power_sd = np.std(gamma_power)
 
+    # data = {
+    #     'Delta_Value': [all_mean_delta_power], 'Theta_Value': [all_mean_theta_power], 'Alpha_Value': [all_mean_alpha_power], 'Beta_Value': [all_mean_beta_power], 'Gamma_Value': [all_mean_gamma_power],
+    # #     'Delta_Power': [delta_power_db], 'Theta_Power': [theta_power_db], 'Alpha_Power': [alpha_power_db], 'Beta_Power': [beta_power_db], 'Gamma_Power': [gamma_power_db],
+    #     'SD_Delta_Value': [sd_delta_values], 'SD_Theta_Value': [sd_theta_values], 'SD_Alpha_Value': [sd_alpha_values], 'SD_Beta_Value': [sd_beta_values], 'SD_Gamma_Value': [sd_gamma_values]
+    # #     'SD_Delta_Power': [delta_power_sd], 'SD_Theta_Power': [theta_power_sd], 'SD_Alpha_Power': [alpha_power_sd], 'SD_Beta_Power': [beta_power_sd], 'SD_Gamma_Power': [gamma_power_sd]
+    # }
+
     data = {
         'Delta_Value': [all_mean_delta_power], 'Theta_Value': [all_mean_theta_power], 'Alpha_Value': [all_mean_alpha_power], 'Beta_Value': [all_mean_beta_power], 'Gamma_Value': [all_mean_gamma_power],
-        # 'Delta_Power': [delta_power_db], 'Theta_Power': [theta_power_db], 'Alpha_Power': [alpha_power_db], 'Beta_Power': [beta_power_db], 'Gamma_Power': [gamma_power_db],
-        'SD_Delta_Value': [sd_delta_values], 'SD_Theta_Value': [sd_theta_values], 'SD_Alpha_Value': [sd_alpha_values], 'SD_Beta_Value': [sd_beta_values], 'SD_Gamma_Value': [sd_gamma_values]
-        # 'SD_Delta_Power': [delta_power_sd], 'SD_Theta_Power': [theta_power_sd], 'SD_Alpha_Power': [alpha_power_sd], 'SD_Beta_Power': [beta_power_sd], 'SD_Gamma_Power': [gamma_power_sd]
-    }
+        'SD_Delta_Value': [sd_delta_values],'SD_Beta_Value': [sd_beta_values],'SD_Gamma_Value': [sd_gamma_values]
+    } 
 
     df = pd.DataFrame(data)
     df.to_csv('TestingFix.csv', index=False, float_format='%.6f')
@@ -329,7 +337,7 @@ while True:
     time.sleep(1)
     data_to_classify = pd.read_csv("TestingFix.csv")
 
-    knn = joblib.load('knn_model.joblib')
+    knn = joblib.load('model.joblib')
     predictions = knn.predict(data_to_classify)
     print("Hasil prediksi:")
     print(predictions)
