@@ -58,17 +58,17 @@ while True:
         mylcd.lcd_clear()
         
     ip = "192.168.99.214"
-    port = 5000
+    port = 8080
 
     eeg_data = []
-    record_duration = 60
+    record_duration = 20
     record_started = False
     server = None 
 
     mylcd.lcd_clear()
 
     mylcd = I2C_LCD_driver.lcd()
-    countdown_seconds = 60
+    countdown_seconds = 20
     remaining_time = countdown_seconds
 
     # Membuat thread untuk countdown
