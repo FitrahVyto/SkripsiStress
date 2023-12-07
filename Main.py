@@ -8,7 +8,7 @@ import pandas as pd
 from collections import deque
 
 
-ip = "192.168.223.214"
+ip = "192.168.99.214"
 port = 5000
 
 eeg_data = []

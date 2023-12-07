@@ -21,6 +21,22 @@ from time import sleep
 
 import I2C_LCD_driver
 
+def countdown_thread():
+    global remaining_time, countdown_running
+    while remaining_time > 0 and countdown_running:
+        mylcd.lcd_clear()
+        mylcd.lcd_display_string(f"Waiting in :", 1, 2)
+        mylcd.lcd_display_string(f"{remaining_time} s", 2, 6)
+        time.sleep(1)
+        remaining_time -= 1
+
+    mylcd.lcd_clear()
+
+def reset_program():
+    # Add your code to reset the program state here
+    print("Resetting program...")
+    # Reset any variables or states as needed
+
 # Define the GPIO pins for Button 1 and Button 2
 button1_pin = 8
 button2_pin = 16
@@ -45,19 +61,8 @@ while True:
     time.sleep(2)
     # Your code to execute when Button 1 is pressed
     print("Button 1 pressed. Performing action...")
-
-    def countdown_thread():
-        global remaining_time
-        while remaining_time > 0:
-            mylcd.lcd_clear()
-            mylcd.lcd_display_string(f"Waiting in :", 1, 2)
-            mylcd.lcd_display_string(f"{remaining_time} s", 2, 6)
-            time.sleep(1)
-            remaining_time -= 1
-
-        mylcd.lcd_clear()
         
-    ip = "192.168.99.214"
+    ip = "192.168.196.214"
     port = 5000
 
     eeg_data = []
@@ -70,7 +75,7 @@ while True:
     mylcd = I2C_LCD_driver.lcd()
     countdown_seconds = 60
     remaining_time = countdown_seconds
-
+    countdown_running = True  #Reset
     # Membuat thread untuk countdown
     countdown_thread = threading.Thread(target=countdown_thread)
 
@@ -112,8 +117,6 @@ while True:
         print("Listening on UDP port " + str(port))
         server.serve_forever()
     
-    
-    countdown_thread.join()
     #PreProcessing =====================================================================================================
 
     time.sleep(1)
@@ -350,7 +353,15 @@ while True:
 
     print("Waiting for Button 2 press for reset...")
 
-    button2.wait_for_press()
+    while remaining_time > 0 and not button2.is_pressed:
+        time.sleep(0.1)
+
+    # Stop the countdown thread
+    countdown_running = False
+    countdown_thread.join()
+
+    # Button 2 is pressed, reset the program
+    reset_program()
 
     # Your code to execute when Button 2 is pressed for reset
     print("Button 2 pressed. Resetting...")
