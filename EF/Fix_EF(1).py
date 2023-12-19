@@ -7,7 +7,7 @@ import seaborn as sns
 import numpy as np
 
 # Membaca file CSV
-data = pd.read_csv('/home/pifitrah/SkripsiVyto/SkripsiStress/T5_ATTAR/T5_NS.csv')
+data = pd.read_csv('/home/pifitrah/SkripsiVyto/SkripsiStress/T6_GALEH/T6_NS.csv')
 
 # Konfigurasi metode Welch
 sampling_rate = 256  # Frekuensi sampel data EEG Anda
@@ -213,4 +213,4 @@ data = {
 df = pd.DataFrame(data)
 
 # Menyimpan dataframe ke dalam file CSV
-df.to_csv('T5_NSS_EF.csv', index=False, float_format='%.6f')
+df.to_csv('T6_NS_EF.csv', index=False, float_format='%.6f')

@@ -7,7 +7,7 @@ mylcd = I2C_LCD_driver.lcd()
 start_time = time.perf_counter()
 
 # Baca data CSV tanpa label
-data_to_classify = pd.read_csv("/home/pifitrah/SkripsiVyto/SkripsiStress/T5_NSS_EF.csv")  # Ganti dengan nama file yang sesuai
+data_to_classify = pd.read_csv("/home/pifitrah/SkripsiVyto/SkripsiStress/T6_NS_EF.csv")  # Ganti dengan nama file yang sesuai
 
 # Muat model KNN yang sudah disimpan
 knn = joblib.load('/home/pifitrah/SkripsiVyto/SkripsiStress/fix_knn_model.joblib')

@@ -7,7 +7,7 @@ from scipy.fft import fft
 import spkit as sp
 from spkit.data import load_data
 
-data = pd.read_csv('/home/pifitrah/SkripsiVyto/SkripsiStress/DataTesting/Test_Fix_60_Attar.csv', delimiter=',')  # Ganti 'data_eeg.csv' dengan nama file Anda
+data = pd.read_csv('/home/pifitrah/SkripsiVyto/SkripsiStress/DataTesting/P58_GALEH.csv', delimiter=',')  # Ganti 'data_eeg.csv' dengan nama file Anda
 
 data = data.copy()  # Buat salinan DataFrame
 timestamps = data['Timestamp']
@@ -79,11 +79,11 @@ df_Hasil = pd.DataFrame({
 })
 
 # Simpan DataFrame ke file CSV
-df_Hasil.to_csv('Fix_60_Attar_ICA.csv', index=False)  # Ganti nama file sesuai kebutuhan
+df_Hasil.to_csv('Fix_58_GALEH_ICA.csv', index=False)  # Ganti nama file sesuai kebutuhan
 
 # FILTER OUTLIER REMOVER (Independet Component Analys)
 
-df = pd.read_csv("Fix_60_Attar_ICA.csv")
+df = pd.read_csv("Fix_58_GALEH_ICA.csv")
 
 # Kolom yang akan dianalisis (meliputi tp9, af7, af8, tp10)
 columns = ["TP9", "AF7", "AF8", "TP10"]
@@ -110,5 +110,5 @@ df_cleaned = df.drop(outlier_indices)
 df['Timestamp'] = timestamps
 
 # Menyimpan data yang telah dibersihkan ke file CSV baru
-df_cleaned.to_csv("Fix_60_Attar_PREPROCESSING.csv", index=False)
+df_cleaned.to_csv("Fix_58_GALEH_PREPROCESSING.csv", index=False)
                 

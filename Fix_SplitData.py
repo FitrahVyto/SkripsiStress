@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Membaca data EEG dari file CSV
-csv_file_path = "/home/pifitrah/SkripsiVyto/SkripsiStress/DataTesting/BERSIH/Fix_60_Attar_PREPROCESSING.csv"
+csv_file_path = "/home/pifitrah/SkripsiVyto/SkripsiStress/DataTesting/BERSIH/Fix_58_GALEH_PREPROCESSING.csv"
 df = pd.read_csv(csv_file_path)
 
 # 5 MENIT NS
@@ -10,12 +10,12 @@ df = pd.read_csv(csv_file_path)
 # 8 MENIT MS
 
 # Mendefinisikan rentang waktu dan nama file yang sesuai
-time_ranges = [("2023-12-07 15:02:45", "2023-12-07 15:07:45", "T5_NS"),# 5 MENIT NS
-               ("2023-12-07 15:07:45", "2023-12-07 15:45:45", "T5_HS"),# 38 MENIT HS
-               ("2023-12-07 15:45:45", "2023-12-07 15:53:45", "T5_MS")]# 8 MENIT MS
+time_ranges = [("2023-12-11 13:29:34", "2023-12-11 13:34:34", "T5_NS"),# 5 MENIT NS
+               ("2023-12-11 13:34:34", "2023-12-11 14:12:34", "T5_HS"),# 38 MENIT HS
+               ("2023-12-11 14:12:34", "2023-12-11 14:20:36", "T5_MS")]# 8 MENIT MS
 
 # Nama folder untuk menyimpan potongan data
-output_folder = "T5_ATTAR"
+output_folder = "T6_GALEH"
 
 # Buat folder jika belum ada
 if not os.path.exists(output_folder):
