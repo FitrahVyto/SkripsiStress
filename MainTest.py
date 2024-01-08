@@ -57,7 +57,7 @@ while True:
 
         mylcd.lcd_clear()
         
-    ip = "192.168.99.214"
+    ip = "192.168.224.214"
     port = 5000
 
     eeg_data = []
@@ -326,10 +326,10 @@ while True:
     # }
 
     data = {
-        'Delta_Value': [all_mean_delta_power], 'Theta_Value': [all_mean_theta_power], 'Alpha_Value': [all_mean_alpha_power], 'Beta_Value': [all_mean_beta_power], 'Gamma_Value': [all_mean_gamma_power],
-        'SD_Delta_Value': [sd_delta_values],'SD_Beta_Value': [sd_beta_values],'SD_Gamma_Value': [sd_gamma_values]
+        'Delta_Value': [all_mean_delta_power], 'Theta_Value': [all_mean_theta_power], 'Beta_Value': [all_mean_beta_power], 'Gamma_Value': [all_mean_gamma_power],
+        'SD_Beta_Value': [sd_beta_values],'SD_Gamma_Value': [sd_gamma_values]
     } 
-
+# Delta_Value,Theta_Value,Beta_Value,Gamma_Value,SD_Beta_Value,SD_Gamma_Value
     df = pd.DataFrame(data)
     df.to_csv('TestingFix.csv', index=False, float_format='%.6f')
 
@@ -337,7 +337,7 @@ while True:
     time.sleep(1)
     data_to_classify = pd.read_csv("TestingFix.csv")
 
-    knn = joblib.load('/home/pifitrah/SkripsiVyto/SkripsiStress/model.joblib')
+    knn = joblib.load('/home/pifitrah/SkripsiVyto/SkripsiStress/knnfix_model.joblib')
     predictions = knn.predict(data_to_classify)
     print("Hasil prediksi:")
     print(predictions)

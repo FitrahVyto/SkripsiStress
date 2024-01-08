@@ -38,7 +38,7 @@ print(classification_report(y_test, y_pred))
 print(accuracy_score(y_test, y_pred))
 print(confusion_matrix(y_test, y_pred))
 # Simpan model ke dalam file menggunakan joblib
-joblib.dump(knn, 'fix_knn_model.joblib')
+joblib.dump(knn, 'knnfix_model.joblib')
 
 # End timer
 end_time = time.perf_counter()
