@@ -14,7 +14,7 @@ import time
 start_time = time.perf_counter()
 
 # Baca data CSV yang sudah dilabeli
-data = pd.read_csv('/home/pifitrah/SkripsiVyto/SkripsiStress/KLASIFIKASI7.csv')
+data = pd.read_csv('/home/pifitrah/SkripsiVyto/SkripsiStress/KLASIFIKASI6.csv')
 
 # Pisahkan fitur (X) dan label (y)
 X = data.drop('Label', axis=1)  # Ubah 'label' menjadi nama kolom label sesuai dengan data Anda
